@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProjectForge AI — Build Your Next Big Project</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#07080d;
+    --card:#10121a;
+    --card2:#151823;
+    --border:#252938;
+    --text:#f5f7ff;
+    --muted:#8f96aa;
+    --purple:#8b5cf6;
+    --cyan:#22d3ee;
+    --blue:#3b82f6;
+    --green:#22c55e;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:
+      radial-gradient(circle at 80% 10%,rgba(139,92,246,.13),transparent 30%),
+      radial-gradient(circle at 10% 70%,rgba(34,211,238,.07),transparent 25%),
+      var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,input,select,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+::-webkit-scrollbar{
+    width:7px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#292d3c;
+    border-radius:20px;
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(7,8,13,.75);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:800;
+    font-size:19px;
+}
+
+.logo-icon{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,var(--purple),var(--cyan));
+    box-shadow:0 0 25px rgba(139,92,246,.35);
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-actions{
+    display:flex;
+    gap:10px;
+}
+
+/* BUTTONS */
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 18px;
+    color:white;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--purple),var(--blue));
+    box-shadow:0 10px 35px rgba(139,92,246,.25);
+}
+
+.btn-secondary{
+    background:#171a25;
+    border:1px solid var(--border);
+}
+
+.btn-cyan{
+    background:linear-gradient(135deg,#0891b2,var(--cyan));
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    padding:150px 7% 80px;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:70px;
+    align-items:center;
+    max-width:1500px;
+    margin:auto;
+}
+
+.badge{
+    display:inline-flex;
+    padding:8px 13px;
+    border:1px solid rgba(139,92,246,.3);
+    background:rgba(139,92,246,.08);
+    border-radius:30px;
+    color:#c4b5fd;
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(42px,6vw,76px);
+    line-height:1.02;
+    letter-spacing:-4px;
+    margin-bottom:25px;
+}
+
+.gradient-text{
+    background:linear-gradient(90deg,#fff,#a78bfa,#67e8f9);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.8;
+    max-width:680px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+/* AI VISUAL */
+
+.ai-visual{
+    position:relative;
+    height:510px;
+    border:1px solid var(--border);
+    background:linear-gradient(145deg,rgba(20,23,34,.9),rgba(8,9,15,.9));
+    border-radius:28px;
+    padding:25px;
+    overflow:hidden;
+    box-shadow:0 30px 100px rgba(0,0,0,.35);
+}
+
+.grid{
+    position:absolute;
+    inset:0;
+    opacity:.15;
+    background-image:
+      linear-gradient(#fff 1px,transparent 1px),
+      linear-gradient(90deg,#fff 1px,transparent 1px);
+    background-size:35px 35px;
+}
+
+.ai-center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,var(--purple),var(--cyan));
+    box-shadow:0 0 90px rgba(139,92,246,.45);
+    font-size:42px;
+    animation:pulse 3s infinite;
+}
+
+.node{
+    position:absolute;
+    padding:13px 18px;
+    border-radius:12px;
+    border:1px solid #303545;
+    background:rgba(18,20,30,.9);
+    backdrop-filter:blur(10px);
+    font-size:13px;
+}
+
+.node span{
+    display:block;
+    color:var(--muted);
+    margin-top:5px;
+    font-size:11px;
+}
+
+.n1{top:55px;left:35px}
+.n2{top:60px;right:35px}
+.n3{bottom:65px;left:40px}
+.n4{bottom:60px;right:40px}
+
+@keyframes pulse{
+    50%{transform:translate(-50%,-50%) scale(1.08)}
+}
+
+/* METRICS */
+
+.metrics{
+    max-width:1200px;
+    margin:-20px auto 100px;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.metric{
+    padding:25px;
+    background:rgba(16,18,26,.7);
+    border:1px solid var(--border);
+    border-radius:18px;
+}
+
+.metric strong{
+    display:block;
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.metric span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* SECTIONS */
+
+.section{
+    max-width:1200px;
+    margin:auto;
+    padding:90px 20px;
+}
+
+.section-title{
+    margin-bottom:35px;
+}
+
+.section-title small{
+    color:#a78bfa;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
+
+.section-title h2{
+    font-size:40px;
+    margin-top:10px;
+    letter-spacing:-1px;
+}
+
+.section-title p{
+    color:var(--muted);
+    margin-top:10px;
+}
+
+/* GENERATOR */
+
+.generator{
+    background:linear-gradient(145deg,#11131d,#0b0d13);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:35px;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+    margin-bottom:35px;
+}
+
+.step{
+    padding:13px;
+    text-align:center;
+    border-radius:10px;
+    color:var(--muted);
+    background:#151822;
+    font-size:12px;
+}
+
+.step.active{
+    background:rgba(139,92,246,.18);
+    color:#c4b5fd;
+    border:1px solid rgba(139,92,246,.4);
+}
+
+.form-step{
+    display:none;
+}
+
+.form-step.active{
+    display:block;
+    animation:fade .3s;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-size:13px;
+    color:#c4c9d7;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:14px;
+    background:#0b0d13;
+    border:1px solid var(--border);
+    color:white;
+    border-radius:10px;
+    outline:none;
+}
+
+input:focus,select:focus,textarea:focus{
+    border-color:var(--purple);
+}
+
+textarea{
+    resize:vertical;
+    min-height:100px;
+}
+
+.chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+}
+
+.chip{
+    padding:10px 14px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:#121520;
+    color:#aeb4c5;
+    cursor:pointer;
+    font-size:12px;
+    transition:.2s;
+}
+
+.chip:hover,
+.chip.selected{
+    background:rgba(139,92,246,.17);
+    border-color:var(--purple);
+    color:white;
+}
+
+.form-actions{
+    margin-top:30px;
+    display:flex;
+    justify-content:space-between;
+}
+
+/* RESULT */
+
+#result{
+    display:none;
+}
+
+.project-header{
+    padding:35px;
+    border:1px solid var(--border);
+    border-radius:24px;
+    background:linear-gradient(145deg,#131624,#0d0f17);
+    margin-bottom:20px;
+}
+
+.project-header h2{
+    font-size:42px;
+    margin:15px 0;
+}
+
+.project-header p{
+    color:var(--muted);
+    line-height:1.7;
+    max-width:800px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.tag{
+    padding:7px 11px;
+    border-radius:20px;
+    font-size:11px;
+    background:#191c28;
+    color:#b9c0d3;
+    border:1px solid var(--border);
+}
+
+/* DASHBOARD GRID */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:20px;
+}
+
+.card{
+    background:rgba(16,18,26,.85);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+}
+
+.card h3{
+    margin-bottom:20px;
+}
+
+.card p{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:14px;
+}
+
+.score{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.circle{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:
+      radial-gradient(circle at center,#10121a 55%,transparent 56%),
+      conic-gradient(var(--purple) 0 91%,#242735 91%);
+}
+
+.circle strong{
+    font-size:30px;
+}
+
+.score-list{
+    flex:1;
+}
+
+.score-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    margin:12px 0;
+}
+
+.progress{
+    height:5px;
+    background:#252936;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:5px;
+}
+
+.progress div{
+    height:100%;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+    border-radius:10px;
+}
+
+/* FEATURE CARDS */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.feature{
+    padding:18px;
+    background:#131620;
+    border:1px solid var(--border);
+    border-radius:14px;
+}
+
+.feature-icon{
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.feature h4{
+    margin-bottom:7px;
+}
+
+.feature p{
+    font-size:12px;
+}
+
+.status{
+    display:inline-block;
+    margin-top:12px;
+    font-size:10px;
+    padding:5px 8px;
+    border-radius:5px;
+    background:rgba(34,197,94,.12);
+    color:#86efac;
+}
+
+/* DNA */
+
+.dna{
+    display:grid;
+    gap:16px;
+}
+
+.dna-row{
+    display:grid;
+    grid-template-columns:120px 1fr 45px;
+    align-items:center;
+    gap:10px;
+    font-size:12px;
+}
+
+.dna-bar{
+    height:8px;
+    border-radius:10px;
+    background:#242734;
+    overflow:hidden;
+}
+
+.dna-bar div{
+    height:100%;
+    background:linear-gradient(90deg,var(--purple),var(--cyan));
+}
+
+/* ARCHITECTURE */
+
+.architecture{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:25px 0;
+}
+
+.arch-node{
+    padding:17px 22px;
+    border:1px solid #353a4b;
+    border-radius:12px;
+    background:#171a25;
+    text-align:center;
+}
+
+.arch-node small{
+    display:block;
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.arrow{
+    color:#777f96;
+    font-size:25px;
+}
+
+/* ROADMAP */
+
+.timeline{
+    border-left:2px solid #292d3b;
+    margin-left:15px;
+    padding-left:25px;
+}
+
+.phase{
+    position:relative;
+    margin-bottom:28px;
+}
+
+.phase:before{
+    content:"";
+    position:absolute;
+    left:-34px;
+    top:4px;
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:var(--purple);
+    box-shadow:0 0 15px rgba(139,92,246,.7);
+}
+
+.phase h4{
+    margin-bottom:6px;
+}
+
+.phase span{
+    color:#a78bfa;
+    font-size:11px;
+}
+
+.phase p{
+    margin-top:6px;
+}
+
+/* MENTOR */
+
+.mentor{
+    display:grid;
+    grid-template-rows:1fr auto;
+    height:420px;
+}
+
+.chat{
+    overflow:auto;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.message{
+    max-width:80%;
+    padding:12px 15px;
+    border-radius:12px;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.bot{
+    background:#171a25;
+    color:#cdd2df;
+    align-self:flex-start;
+}
+
+.user{
+    background:linear-gradient(135deg,#6941c6,#345fd1);
+    align-self:flex-end;
+}
+
+.chat-input{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+
+/* TOOLS */
+
+.tools{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.tool{
+    padding:22px;
+    background:#131620;
+    border:1px solid var(--border);
+    border-radius:16px;
+}
+
+.tool button{
+    margin-top:15px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
+}
+
+.modal-box{
+    width:600px;
+    max-width:100%;
+    background:#11141d;
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:30px;
+    max-height:80vh;
+    overflow:auto;
+}
+
+.modal-box h2{
+    margin-bottom:15px;
+}
+
+.modal-box p{
+    color:var(--muted);
+    line-height:1.8;
+    white-space:pre-line;
+}
+
+/* LOADER */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:#07080d;
+    z-index:3000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.loader-orb{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--purple),var(--cyan));
+    box-shadow:0 0 80px rgba(139,92,246,.6);
+    animation:pulse 1.2s infinite;
+    margin-bottom:30px;
+}
+
+.loader h2{
+    margin-bottom:12px;
+}
+
+.loader p{
+    color:var(--muted);
+}
+
+footer{
+    border-top:1px solid var(--border);
+    text-align:center;
+    padding:35px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+    .hero{
+        grid-template-columns:1fr;
+        padding-top:120px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .metrics{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .features,
+    .tools{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .navbar{
+        padding:0 18px;
+    }
+
+    .nav-actions .btn-secondary{
+        display:none;
+    }
+
+    .hero{
+        padding:110px 18px 50px;
+    }
+
+    .hero h1{
+        font-size:43px;
+        letter-spacing:-2px;
+    }
+
+    .ai-visual{
+        height:390px;
+    }
+
+    .node{
+        font-size:10px;
+    }
+
+    .metrics{
+        grid-template-columns:1fr 1fr;
+        margin-bottom:30px;
+    }
+
+    .section{
+        padding:55px 15px;
+    }
+
+    .generator{
+        padding:18px;
+    }
+
+    .steps{
+        grid-template-columns:repeat(5,1fr);
+    }
+
+    .step{
+        font-size:9px;
+        padding:9px 3px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .features,
+    .tools{
+        grid-template-columns:1fr;
+    }
+
+    .project-header h2{
+        font-size:30px;
+    }
+
+    .score{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .dna-row{
+        grid-template-columns:90px 1fr 35px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+    <a href="#" class="logo">
+        <span class="logo-icon">⚡</span>
+        ProjectForge AI
+    </a>
+
+    <div class="nav-links">
+        <a href="#generator">Generate</a>
+        <a href="#result">Workspace</a>
+        <a href="#mentor">AI Mentor</a>
+        <a href="#tools">Tools</a>
+    </div>
+
+    <div class="nav-actions">
+        <button class="btn btn-secondary" onclick="demo()">Try Demo</button>
+        <button class="btn btn-primary" onclick="startGenerator()">Generate</button>
+    </div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div>
+        <div class="badge">✦ AI-Powered Project Architecture</div>
+
+        <h1>
+            Your Skills.<br>
+            Your Interests.<br>
+            <span class="gradient-text">Your Next Big Project.</span>
+        </h1>
+
+        <p>
+            ProjectForge AI transforms your skills and interests into
+            practical, innovative and buildable projects—with architecture,
+            technology choices, features and a complete development roadmap.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="startGenerator()">
+                Generate My Project →
+            </button>
+
+            <button class="btn btn-secondary" onclick="demo()">
+                ▶ Try Live Demo
+            </button>
+        </div>
+    </div>
+
+
+    <div class="ai-visual">
+
+        <div class="grid"></div>
+
+        <div class="node n1">
+            🧠 YOUR SKILLS
+            <span>Python • AI/ML • JS</span>
+        </div>
+
+        <div class="node n2">
+            💡 INTERESTS
+            <span>AI • Cyber • EdTech</span>
+        </div>
+
+        <div class="node n3">
+            🏗 ARCHITECTURE
+            <span>API • Database • ML</span>
+        </div>
+
+        <div class="node n4">
+            🚀 ROADMAP
+            <span>50 Day Build Plan</span>
+        </div>
+
+        <div class="ai-center">⚡</div>
+
+    </div>
+
+</section>
+
+
+<!-- METRICS -->
+
+<div class="metrics">
+
+    <div class="metric">
+        <strong>10K+</strong>
+        <span>Project Concepts</span>
+    </div>
+
+    <div class="metric">
+        <strong>50+</strong>
+        <span>Technology Domains</span>
+    </div>
+
+    <div class="metric">
+        <strong>AI-Powered</strong>
+        <span>Project Guidance</span>
+    </div>
+
+    <div class="metric">
+        <strong>End-to-End</strong>
+        <span>Development Roadmaps</span>
+    </div>
+
+</div>
+
+
+<!-- GENERATOR -->
+
+<section class="section" id="generator">
+
+    <div class="section-title">
+        <small>Project Generator</small>
+        <h2>Turn your skills into a project.</h2>
+        <p>Tell Forge about yourself. We'll build the blueprint.</p>
+    </div>
+
+    <div class="generator">
+
+        <div class="steps">
+            <div class="step active" id="s1">01 Profile</div>
+            <div class="step" id="s2">02 Interests</div>
+            <div class="step" id="s3">03 Skills</div>
+            <div class="step" id="s4">04 Constraints</div>
+            <div class="step" id="s5">05 Generate</div>
+        </div>
+
+
+        <!-- STEP 1 -->
+
+        <div class="form-step active" id="step1">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Your Name</label>
+                    <input id="name" placeholder="Enter your name">
+                </div>
+
+                <div class="field">
+                    <label>Degree</label>
+                    <select id="degree">
+                        <option>B.Tech</option>
+                        <option>BCA</option>
+                        <option>MCA</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Branch</label>
+                    <select id="branch">
+                        <option>CSE AI/ML</option>
+                        <option>CSE</option>
+                        <option>IT</option>
+                        <option>ECE</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Year</label>
+                    <select id="year">
+                        <option>2nd Year</option>
+                        <option>3rd Year</option>
+                        <option>Final Year</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Team Size</label>
+                    <select id="team">
+                        <option>Solo</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4+</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <span></span>
+                <button class="btn btn-primary" onclick="nextStep(2)">
+                    Continue →
+                </button>
+            </div>
+
+        </div>
+
+
+        <!-- STEP 2 -->
+
+        <div class="form-step" id="step2">
+
+            <h3>Select your interests</h3>
+
+            <br>
+
+            <div class="chips">
+
+                <div class="chip">AI / ML</div>
+                <div class="chip">Generative AI</div>
+                <div class="chip">Computer Vision</div>
+                <div class="chip">NLP</div>
+                <div class="chip">Cybersecurity</div>
+                <div class="chip">Web Development</div>
+                <div class="chip">App Development</div>
+                <div class="chip">IoT</div>
+                <div class="chip">Robotics</div>
+                <div class="chip">Cloud</div>
+                <div class="chip">Data Science</div>
+                <div class="chip">FinTech</div>
+                <div class="chip">EdTech</div>
+                <div class="chip">HealthTech</div>
+                <div class="chip">AgriTech</div>
+                <div class="chip">Sustainability</div>
+
+            </div>
+
+            <br>
+
+            <label>Describe your own idea or interest</label>
+
+            <textarea id="customIdea"
+            placeholder="Example: I want to build something using AI that helps students..."></textarea>
+
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="nextStep(1)">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep(3)">Continue →</button>
+            </div>
+
+        </div>
+
+
+        <!-- STEP 3 -->
+
+        <div class="form-step" id="step3">
+
+            <h3>Your technical skills</h3>
+
+            <br>
+
+            <div class="chips">
+
+                <div class="chip">HTML</div>
+                <div class="chip">CSS</div>
+                <div class="chip">JavaScript</div>
+                <div class="chip">Python</div>
+                <div class="chip">Java</div>
+                <div class="chip">C++</div>
+                <div class="chip">Node.js</div>
+                <div class="chip">React</div>
+                <div class="chip">Machine Learning</div>
+                <div class="chip">TensorFlow</div>
+                <div class="chip">PyTorch</div>
+                <div class="chip">OpenCV</div>
+                <div class="chip">NLP</div>
+                <div class="chip">LLM APIs</div>
+                <div class="chip">MySQL</div>
+                <div class="chip">MongoDB</div>
+                <div class="chip">Firebase</div>
+                <div class="chip">AWS</div>
+
+            </div>
+
+            <br>
+
+            <div class="field">
+                <label>Overall Skill Level</label>
+                <select id="level">
+                    <option>Beginner</option>
+                    <option selected>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="nextStep(2)">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep(4)">Continue →</button>
+            </div>
+
+        </div>
+
+
+        <!-- STEP 4 -->
+
+        <div class="form-step" id="step4">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Project Difficulty</label>
+                    <select id="difficulty">
+                        <option>Easy</option>
+                        <option selected>Medium</option>
+                        <option>Advanced</option>
+                        <option>Research-Level</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Available Time</label>
+                    <select id="time">
+                        <option>2 Weeks</option>
+                        <option>1 Month</option>
+                        <option>2 Months</option>
+                        <option selected>3–6 Months</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Budget</label>
+                    <select id="budget">
+                        <option>₹0</option>
+                        <option>₹500</option>
+                        <option selected>₹2,000</option>
+                        <option>₹5,000+</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Project Goal</label>
+                    <select id="goal">
+                        <option>Academic Project</option>
+                        <option selected>Resume Project</option>
+                        <option>Hackathon</option>
+                        <option>Startup Prototype</option>
+                        <option>Research Project</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Hardware</label>
+                    <select id="hardware">
+                        <option selected>No hardware</option>
+                        <option>Arduino</option>
+                        <option>ESP32</option>
+                        <option>Raspberry Pi</option>
+                        <option>Sensors</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="nextStep(3)">← Back</button>
+                <button class="btn btn-primary" onclick="generate()">
+                    ⚡ Generate My Project
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RESULT -->
+
+<section class="section" id="result">
+
+    <div class="section-title">
+        <small>Your AI Blueprint</small>
+        <h2>Your project is ready.</h2>
+    </div>
+
+
+    <div class="project-header">
+
+        <div class="tags">
+            <span class="tag">AI/ML</span>
+            <span class="tag">Cybersecurity</span>
+            <span class="tag">Web</span>
+            <span class="tag">Intermediate</span>
+            <span class="tag">3 Months</span>
+        </div>
+
+        <h2>AegisAI — Student Cybersecurity Guardian</h2>
+
+        <p>
+            An AI-powered system that detects suspicious digital behavior,
+            explains potential threats and helps students improve their
+            cybersecurity awareness through intelligent recommendations.
+        </p>
+
+        <br>
+
+        <button class="btn btn-primary" onclick="showPitch()">
+            🎤 Pitch My Project
+        </button>
+
+        <button class="btn btn-secondary" onclick="judge()">
+            ⚖ Judge My Project
+        </button>
+
+    </div>
+
+
+    <div class="dashboard-grid">
+
+        <!-- SCORE -->
+
+        <div class="card">
+
+            <h3>Project Score</h3>
+
+            <div class="score">
+
+                <div class="circle">
+                    <strong>91</strong>
+                </div>
+
+                <div class="score-list">
+
+                    <div class="score-row">
+                        <span>Innovation</span><b>92</b>
+                    </div>
+                    <div class="progress"><div style="width:92%"></div></div>
+
+                    <div class="score-row">
+                        <span>Feasibility</span><b>88</b>
+                    </div>
+                    <div class="progress"><div style="width:88%"></div></div>
+
+                    <div class="score-row">
+                        <span>Technical Depth</span><b>94</b>
+                    </div>
+                    <div class="progress"><div style="width:94%"></div></div>
+
+                    <div class="score-row">
+                        <span>Resume Value</span><b>95</b>
+                    </div>
+                    <div class="progress"><div style="width:95%"></div></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- WHY -->
+
+        <div class="card">
+
+            <h3>Why this project?</h3>
+
+            <p>
+                Because your profile combines programming and AI/ML interests,
+                this project gives you meaningful technical depth while
+                remaining achievable within your selected timeline and budget.
+            </p>
+
+            <br>
+
+            <p>
+                <b style="color:white">Buildability:</b>
+                <span style="color:#86efac"> HIGH</span>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- FEATURES -->
+
+    <div class="card">
+
+        <h3>Core Features</h3>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="feature-icon">🧠</div>
+                <h4>AI Threat Detection</h4>
+                <p>Detect suspicious behavior using machine learning.</p>
+                <span class="status">MVP</span>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h4>Risk Dashboard</h4>
+                <p>Visualize security risks and activity patterns.</p>
+                <span class="status">MVP</span>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🔔</div>
+                <h4>Smart Alerts</h4>
+                <p>Notify users about potential security threats.</p>
+                <span class="status">MVP</span>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">💬</div>
+                <h4>AI Explanation</h4>
+                <p>Explain why an activity was classified as risky.</p>
+                <span class="status">Advanced</span>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📈</div>
+                <h4>Activity Analytics</h4>
+                <p>Track historical security trends.</p>
+                <span class="status">Advanced</span>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">✨</div>
+                <h4>Recommendations</h4>
+                <p>Generate personalized security improvements.</p>
+                <span class="status">Future</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- PROJECT DNA -->
+
+    <div class="card">
+
+        <h3>⚡ Project DNA</h3>
+
+        <div class="dna">
+
+            <div class="dna-row">
+                <span>AI Depth</span>
+                <div class="dna-bar"><div style="width:90%"></div></div>
+                <b>90%</b>
+            </div>
+
+            <div class="dna-row">
+                <span>Innovation</span>
+                <div class="dna-bar"><div style="width:82%"></div></div>
+                <b>82%</b>
+            </div>
+
+            <div class="dna-row">
+                <span>Difficulty</span>
+                <div class="dna-bar"><div style="width:64%"></div></div>
+                <b>64%</b>
+            </div>
+
+            <div class="dna-row">
+                <span>Impact</span>
+                <div class="dna-bar"><div style="width:91%"></div></div>
+                <b>91%</b>
+            </div>
+
+            <div class="dna-row">
+                <span>Scalability</span>
+                <div class="dna-bar"><div style="width:85%"></div></div>
+                <b>85%</b>
+            </div>
+
+            <div class="dna-row">
+                <span>Resume Value</span>
+                <div class="dna-bar"><div style="width:96%"></div></div>
+                <b>96%</b>
+            </div>
+
+        </div>
+
+        <br>
+
+        <p>
+            This project is highly suitable for an AI/ML student who wants
+            strong resume value without requiring expensive hardware.
+        </p>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ARCHITECTURE -->
+
+    <div class="card">
+
+        <h3>System Architecture</h3>
+
+        <div class="architecture">
+
+            <div class="arch-node">
+                👤 User
+                <small>Web Interface</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="arch-node">
+                💻 Frontend
+                <small>HTML / CSS / JS</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="arch-node">
+                ⚙ Backend API
+                <small>FastAPI</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="arch-node">
+                🧠 AI Engine
+                <small>Python ML</small>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="arch-node">
+                🗄 Database
+                <small>PostgreSQL</small>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ROADMAP -->
+
+    <div class="card">
+
+        <h3>50-Day Development Roadmap</h3>
+
+        <div class="timeline">
+
+            <div class="phase">
+                <h4>Phase 1 — Planning</h4>
+                <span>DAY 1–3</span>
+                <p>Define requirements, users, datasets and system architecture.</p>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 2 — UI Development</h4>
+                <span>DAY 4–10</span>
+                <p>Build dashboard, authentication and project interface.</p>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 3 — Backend</h4>
+                <span>DAY 11–18</span>
+                <p>Create APIs, authentication and database models.</p>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 4 — AI/ML</h4>
+                <span>DAY 19–30</span>
+                <p>Train detection model and create prediction pipeline.</p>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 5 — Integration</h4>
+                <span>DAY 31–38</span>
+                <p>Connect frontend, backend and AI engine.</p>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 6 — Testing</h4>
+                <span>DAY 39–45</span>
+                <p>Test accuracy, usability, security and performance.</p>
+            </div>
+
+            <div class="phase">
+                <h4>Phase 7 — Deployment</h4>
+                <span>DAY 46–50</span>
+                <p>Deploy application and prepare final presentation.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AI MENTOR -->
+
+<section class="section" id="mentor">
+
+    <div class="section-title">
+        <small>Forge Mentor</small>
+        <h2>Your AI project mentor.</h2>
+        <p>Ask questions while building your project.</p>
+    </div>
+
+    <div class="card mentor">
+
+        <div class="chat" id="chat">
+
+            <div class="message bot">
+                👋 Hi! I'm Forge Mentor.<br><br>
+                Your project blueprint is ready. Ask me anything about
+                architecture, coding, ML, APIs, databases or your roadmap.
+            </div>
+
+            <div class="message user">
+                How should I start?
+            </div>
+
+            <div class="message bot">
+                Start with the MVP. Build authentication → data collection →
+                ML prediction API → dashboard → alerts. Don't build advanced
+                features until the core workflow works.
+            </div>
+
+        </div>
+
+        <div class="chat-input">
+            <input id="mentorInput" placeholder="Ask Forge Mentor...">
+            <button class="btn btn-primary" onclick="askMentor()">Send</button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TOOLS -->
+
+<section class="section" id="tools">
+
+    <div class="section-title">
+        <small>AI Tools</small>
+        <h2>Turn your project into a career asset.</h2>
+    </div>
+
+    <div class="tools">
+
+        <div class="tool">
+            <h3>⚖ Judge My Project</h3>
+            <p>Get a hackathon-style evaluation with strengths, weaknesses and improvements.</p>
+            <button class="btn btn-secondary" onclick="judge()">Evaluate</button>
+        </div>
+
+        <div class="tool">
+            <h3>🚀 Make It Better</h3>
+            <p>Discover quick wins, innovation ideas, scalability and startup opportunities.</p>
+            <button class="btn btn-secondary" onclick="improve()">Improve</button>
+        </div>
+
+        <div class="tool">
+            <h3>🎤 Pitch My Project</h3>
+            <p>Generate a concise 60-second hackathon pitch for your project.</p>
+            <button class="btn btn-secondary" onclick="showPitch()">Generate Pitch</button>
+        </div>
+
+        <div class="tool">
+            <h3>📄 Documentation</h3>
+            <p>Create project abstract, objectives, methodology and viva questions.</p>
+            <button class="btn btn-secondary" onclick="documentation()">Generate</button>
+        </div>
+
+        <div class="tool">
+            <h3>🎲 Surprise Me</h3>
+            <p>Generate an unexpected project concept from your skill profile.</p>
+            <button class="btn btn-cyan" onclick="surprise()">Surprise Me</button>
+        </div>
+
+        <div class="tool">
+            <h3>🔬 Dataset Finder</h3>
+            <p>Find realistic dataset recommendations for your AI/ML project.</p>
+            <button class="btn btn-secondary" onclick="dataset()">Find Dataset</button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+    <b>ProjectForge AI</b> — Turn Your Skills Into Your Next Big Project.
+    <br><br>
+    Built for Prompt Wars ⚡
+</footer>
+
+
+<!-- LOADER -->
+
+<div class="loader" id="loader">
+
+    <div class="loader-orb"></div>
+
+    <h2 id="loaderTitle">Analyzing your skills...</h2>
+
+    <p id="loaderText">Forge is building your project blueprint.</p>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalText"></p>
+
+        <br>
+
+        <button class="btn btn-primary" onclick="closeModal()">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* CHIPS */
+
+document.querySelectorAll(".chip").forEach(chip=>{
+    chip.addEventListener("click",()=>{
+        chip.classList.toggle("selected");
+    });
+});
+
+
+/* NAVIGATION */
+
+function startGenerator(){
+
+    document.querySelector("#generator").scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+function nextStep(num){
+
+    document.querySelectorAll(".form-step").forEach(x=>{
+        x.classList.remove("active");
+    });
+
+    document.querySelector("#step"+num).classList.add("active");
+
+    for(let i=1;i<=5;i++){
+        document.querySelector("#s"+i).classList.remove("active");
+    }
+
+    document.querySelector("#s"+num).classList.add("active");
+
+}
+
+
+/* DEMO */
+
+function demo(){
+
+    document.querySelector("#name").value="Ayush";
+
+    document.querySelector("#degree").value="B.Tech";
+    document.querySelector("#branch").value="CSE AI/ML";
+    document.querySelector("#year").value="3rd Year";
+    document.querySelector("#team").value="Solo";
+
+    document.querySelector("#customIdea").value=
+    "AI-powered platform that helps students create innovative final-year projects.";
+
+    document.querySelector("#level").value="Intermediate";
+    document.querySelector("#difficulty").value="Medium";
+    document.querySelector("#time").value="3–6 Months";
+    document.querySelector("#budget").value="₹2,000";
+    document.querySelector("#goal").value="Hackathon";
+    document.querySelector("#hardware").value="No hardware";
+
+    document.querySelectorAll(".chip").forEach((chip,i)=>{
+        if(i<5) chip.classList.add("selected");
+    });
+
+    startGenerator();
+
+    setTimeout(()=>{
+        nextStep(4);
+    },400);
+
+}
+
+
+/* GENERATE */
+
+function generate(){
+
+    const loader=document.querySelector("#loader");
+
+    loader.style.display="flex";
+
+    const title=document.querySelector("#loaderTitle");
+    const text=document.querySelector("#loaderText");
+
+    const stages=[
+        ["Analyzing your skills...","Matching your technical profile."],
+        ["Matching interests...","Finding relevant project domains."],
+        ["Checking feasibility...","Evaluating time, budget and complexity."],
+        ["Designing architecture...","Building your technical blueprint."],
+        ["Evaluating innovation...","Checking uniqueness and resume value."],
+        ["Building your roadmap...","Creating your development plan."]
+    ];
+
+    let i=0;
+
+    const interval=setInterval(()=>{
+
+        title.textContent=stages[i][0];
+        text.textContent=stages[i][1];
+
+        i++;
+
+        if(i>=stages.length){
+
+            clearInterval(interval);
+
+            setTimeout(()=>{
+
+                loader.style.display="none";
+
+                document.querySelector("#result").style.display="block";
+
+                document.querySelector("#result").scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            },600);
+
+        }
+
+    },700);
+
+}
+
+
+/* MODAL */
+
+function showModal(title,text){
+
+    document.querySelector("#modalTitle").textContent=title;
+    document.querySelector("#modalText").textContent=text;
+    document.querySelector("#modal").style.display="flex";
+
+}
+
+function closeModal(){
+    document.querySelector("#modal").style.display="none";
+}
+
+
+/* JUDGE */
+
+function judge(){
+
+    showModal(
+        "⚖ AI Judge Evaluation",
+
+`PROJECT SCORE: 91/100
+
+Biggest Strength:
+Strong combination of AI/ML, cybersecurity and practical student use-case.
+
+Innovation:
+92/100
+
+Problem Relevance:
+94/100
+
+Technical Complexity:
+90/100
+
+Feasibility:
+88/100
+
+User Impact:
+91/100
+
+Scalability:
+89/100
+
+Presentation Potential:
+96/100
+
+Biggest Weakness:
+The project needs a clearly defined dataset and measurable ML evaluation metrics.
+
+What I Would Add:
+1. Explainable AI dashboard
+2. Real-time risk visualization
+3. Benchmark model accuracy
+4. Live hackathon demo scenario
+
+Judge Verdict:
+STRONG HACKATHON PROJECT — BUILDABLE + DEMONSTRABLE + RESUME VALUABLE.`
+    );
+
+}
+
+
+/* PITCH */
+
+function showPitch(){
+
+    showModal(
+        "🎤 60-Second Project Pitch",
+
+`Problem:
+Students spend a lot of time searching for projects but struggle to know whether an idea is practical, innovative and achievable.
+
+Solution:
+ProjectForge AI converts a student's skills and interests into a complete project blueprint.
+
+How it works:
+The platform analyzes the student's profile, evaluates feasibility and generates the project architecture, technology stack, features and development roadmap.
+
+Innovation:
+Instead of simply generating an idea, ProjectForge AI helps students evolve that idea from MVP to advanced product, startup or research opportunity.
+
+Impact:
+Students don't just leave with an idea. They leave knowing exactly what to build and how to build it.
+
+Vision:
+From "I don't know what to build" → "I know exactly what to build."`
+    );
+
+}
+
+
+/* IMPROVE */
+
+function improve(){
+
+    showModal(
+        "🚀 Make My Project Better",
+
+`QUICK WINS
+
+• Add explainable AI predictions
+• Add downloadable project blueprint
+• Add progress tracking
+• Add GitHub README generator
+
+INNOVATION
+
+• Project uniqueness scoring
+• AI architecture reviewer
+• Personalized project evolution
+
+AI ENHANCEMENTS
+
+• LLM-powered project mentor
+• Automatic code suggestions
+• Intelligent debugging assistant
+
+SCALABILITY
+
+• Team collaboration
+• Cloud deployment
+• Project marketplace
+
+STARTUP POTENTIAL
+
+Create a platform where students can discover, build and showcase verified projects.
+
+RESEARCH POTENTIAL
+
+Study AI-based personalization and project recommendation systems.`
+    );
+
+}
+
+
+/* DOCUMENTATION */
+
+function documentation(){
+
+    showModal(
+        "📄 Project Documentation",
+
+`ABSTRACT
+
+ProjectForge AI is an intelligent project recommendation and development guidance platform designed for engineering students.
+
+OBJECTIVES
+
+1. Personalize project recommendations.
+2. Evaluate project feasibility.
+3. Generate technical architecture.
+4. Create development roadmaps.
+5. Provide continuous AI mentorship.
+
+METHODOLOGY
+
+Student Profile
+↓
+Interest & Skill Analysis
+↓
+Project Generation
+↓
+Feasibility Evaluation
+↓
+Architecture Generation
+↓
+Roadmap
+↓
+AI Mentorship
+
+VIVA QUESTIONS
+
+1. Why did you choose this project?
+2. How does AI personalize recommendations?
+3. How would you measure uniqueness?
+4. What ML model could be used?
+5. How would you scale the platform?`
+    );
+
+}
+
+
+/* DATASET */
+
+function dataset(){
+
+    showModal(
+        "🔬 Dataset Suggestions",
+
+`1. CICIDS2017
+Purpose: Network intrusion detection
+Type: Network traffic
+ML: Classification
+
+2. UNSW-NB15
+Purpose: Cybersecurity anomaly detection
+Type: Network traffic
+ML: Classification / anomaly detection
+
+3. Phishing Websites Dataset
+Purpose: Detect malicious websites
+Type: Web features
+ML: Binary classification
+
+Recommended starting point:
+Phishing Websites Dataset
+
+Why?
+It is relatively easy to demonstrate in a student project and allows you to show the complete ML pipeline.`
+    );
+
+}
+
+
+/* SURPRISE */
+
+function surprise(){
+
+    showModal(
+        "🎲 Surprise Project",
+
+`NEUROCLASS AI
+
+An AI-powered system that predicts when a student is likely to lose focus during online learning.
+
+AI Component:
+Computer vision + behavioral analytics
+
+Unique Feature:
+The system detects attention patterns and recommends personalized study interventions.
+
+Tech:
+Python
+OpenCV
+Machine Learning
+HTML/CSS/JS
+FastAPI
+
+Difficulty:
+Advanced
+
+Innovation:
+88%
+
+Resume Value:
+94%
+
+WOW FACTOR:
+Real-time AI attention visualization.`
+    );
+
+}
+
+
+/* MENTOR */
+
+function askMentor(){
+
+    const input=document.querySelector("#mentorInput");
+    const chat=document.querySelector("#chat");
+
+    const question=input.value.trim();
+
+    if(!question) return;
+
+    const user=document.createElement("div");
+
+    user.className="message user";
+    user.textContent=question;
+
+    chat.appendChild(user);
+
+    input.value="";
+
+    setTimeout(()=>{
+
+        const bot=document.createElement("div");
+
+        bot.className="message bot";
+
+        let answer=
+        "Start with the MVP. Build the simplest working version first, then add advanced AI features.";
+
+        if(question.toLowerCase().includes("database")){
+            answer=
+            "Use PostgreSQL. Start with Users, Projects, Tasks, Models and Progress tables. Keep relationships simple for the MVP.";
+        }
+
+        if(question.toLowerCase().includes("fastapi")){
+            answer=
+            "FastAPI is a strong choice because it is lightweight, Python-based and integrates naturally with your ML model.";
+        }
+
+        if(question.toLowerCase().includes("accuracy")){
+            answer=
+            "First inspect your dataset and class balance. Then establish a baseline model, evaluate precision/recall/F1 and improve feature engineering before changing algorithms.";
+        }
+
+        if(question.toLowerCase().includes("unique")){
+            answer=
+            "Add explainable AI, project evolution, uniqueness scoring and an AI judge. These features make your project more than a simple recommendation system.";
+        }
+
+        bot.textContent=answer;
+
+        chat.appendChild(bot);
+
+        chat.scrollTop=chat.scrollHeight;
+
+    },700);
+
+}
+
+
+/* CLOSE MODAL ON BACKDROP */
+
+document.querySelector("#modal").addEventListener("click",e=>{
+
+    if(e.target.id==="modal"){
+        closeModal();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
